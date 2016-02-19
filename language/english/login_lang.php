@@ -98,5 +98,11 @@ $lang['LABEL_RE_PASSWORD'] = 'Re-type Password';
 $lang['MSG_NO_FILE_UPLOADED'] = 'No file uploaded';
 $lang['LABEL_OTHER_SITES'] = 'Other Sites';
 
+//
+$lang['LABEL_AGE'] = 'Age';
+$lang['LABEL_SEX'] = 'Sex';
+$lang['LABEL_COMMENT_TOP'] = 'Top Comment';
+$lang['LABEL_COMMENT_BOTTOM'] = 'Bottom Comment';
+
 
 

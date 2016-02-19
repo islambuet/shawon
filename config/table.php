@@ -16,3 +16,8 @@ $config['table_setup_user_type'] = 'setup_user_type';
 $config['table_setup_users_other_sites'] = 'setup_users_other_sites';
 $config['table_other_sites_visit'] = 'other_sites_visit';
 
+
+$config['table_patients'] = 'patients';
+
+
+
