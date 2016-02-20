@@ -89,6 +89,8 @@ class Patients extends Root_Controller
             $data['dxs'][]='dx1';
             $data['comment_top']='this top comment';
             $data['comment_bottom']='this bottom comment';
+            $data['medicines']=array();
+            $data['medicines'][]=array('name'=>'Shaiful','days'=>'4','description'=>'Shaiful','when'=>'Before Meal',);
             $ajax['system_page_url']=site_url($this->controller_url."/index/add");
 
             $ajax['status']=true;

@@ -227,7 +227,70 @@ $CI->load->view("action_buttons",$action_data);
                 </div>
                 <div id="collapse7" class="panel-collapse collapse">
                     <div id="container_medicine">
+                        <?php
+                        foreach($medicines as $i=>$medicine)
+                        {
+                            ?>
+                            <div class="row widget medicine_details">
+                                <div class="widget-header">
+                                    <div class="title">
+                                        <?php echo $CI->lang->line('LABEL_MEDICINE_INFO'); ?>
+                                    </div>
 
+                                    <button type="button" class="btn btn-danger pull-right delete_medicine"><?php echo $CI->lang->line('DELETE'); ?></button>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-4">
+                                        <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_NAME'); ?><span style="color:#FF0000">*</span></label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-8">
+                                        <input type="text" id="medicine_name" name="medicines[<?php echo $i+1; ?>][name]" class="form-control" value="<?php echo $medicine['name'];?>">
+                                    </div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-4">
+                                        <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-8">
+                                        <select id="medicine_days"  name="medicines[<?php echo $i+1; ?>][days]" class="form-control">
+                                            <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                                            <?php
+                                            for($i=0;$i<30;$i++)
+                                            {?>
+                                                <option value="<?php echo $i;?>" <?php if($i==$medicine['days']){ echo "selected";}?>><?php echo $i;?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-4">
+                                        <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DESCRIPTION'); ?><span style="color:#FF0000">*</span></label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-8">
+                                        <input type="text" id="medicine_description"  name="medicines[<?php echo $i+1; ?>][description]" class="form-control" value="<?php echo $medicine['description'];?>"">
+                                    </div>
+                                </div>
+                                <div class="row show-grid">
+                                    <div class="col-xs-4">
+                                        <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-8">
+                                        <select id="medicine_when"  name="medicines[<?php echo $i+1; ?>][when]"  class="form-control">
+                                            <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                                            <option value="After Meal" <?php if($medicine['when']=='After Meal'){ echo "selected";}?>>After Meal</option>
+                                            <option value="Before Meal" <?php if($medicine['when']=='Before Meal'){ echo "selected";}?>>Before Meal</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class="row show-grid">
                         <div class="col-xs-12">
@@ -282,21 +345,62 @@ $CI->load->view("action_buttons",$action_data);
         </div>
     </div>
 </div>
-<div id="add_content_medicine" style="display: none;">
-    <div class="row show-grid">
-        <div class="col-xs-4">
-            <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_NAME');?><span style="color:#FF0000">*</span></label>
+<div id="add_content_medicine" style="display: none;" data-current-id="<?php echo sizeof($medicines); ?>">
+    <div class="row widget medicine_details">
+        <div class="widget-header">
+            <div class="title">
+                <?php echo $CI->lang->line('LABEL_MEDICINE_INFO'); ?>
+            </div>
+
+            <button type="button" class="btn btn-danger pull-right delete_medicine"><?php echo $CI->lang->line('DELETE'); ?></button>
+
+            <div class="clearfix"></div>
+
         </div>
-        <div class="col-sm-4 col-xs-8">
-            <input type="text" name="patient[name]" id="name" class="form-control" value="<?php echo $patient['name'];?>"/>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_NAME'); ?><span style="color:#FF0000">*</span></label>
+            </div>
+            <div class="col-sm-4 col-xs-8">
+                <input type="text" id="medicine_name" class="form-control" value="">
+            </div>
         </div>
-    </div>
-    <div class="row show-grid">
-        <div class="col-xs-4">
-            <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_NAME');?><span style="color:#FF0000">*</span></label>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
+            </div>
+            <div class="col-sm-4 col-xs-8">
+                <select id="medicine_days"  class="form-control">
+                    <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                    <?php
+                    for($i=0;$i<30;$i++)
+                    {?>
+                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+            </div>
         </div>
-        <div class="col-sm-4 col-xs-8">
-            <input type="text" name="patient[name]" id="name" class="form-control" value="<?php echo $patient['name'];?>"/>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DESCRIPTION'); ?><span style="color:#FF0000">*</span></label>
+            </div>
+            <div class="col-sm-4 col-xs-8">
+                <input type="text" id="medicine_description" class="form-control" value="">
+            </div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
+            </div>
+            <div class="col-sm-4 col-xs-8">
+                <select id="medicine_when"  class="form-control">
+                    <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                    <option value="After Meal" >After Meal</option>
+                    <option value="Before Meal" >Before Meal</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -346,12 +450,21 @@ $CI->load->view("action_buttons",$action_data);
 
         $(document).on("click", "#add_medicine", function(event)
         {
+            var current_id=parseInt($('#add_content_medicine').attr('data-current-id'));
+            current_id=current_id+1;
+            console.log(current_id);
+            $('#add_content_medicine').attr('data-current-id',current_id);
+            $('#add_content_medicine #medicine_name').attr('name','medicines['+current_id+'][name]');
+            $('#add_content_medicine #medicine_days').attr('name','medicines['+current_id+'][days]');
+            $('#add_content_medicine #medicine_description').attr('name','medicines['+current_id+'][description]');
+            $('#add_content_medicine #medicine_when').attr('name','medicines['+current_id+'][when]');
             var html=$('#add_content_medicine').html();
             $("#container_medicine").append(html);
         });
         $(document).on("click", ".delete_medicine", function(event)
         {
-            //$(this).closest('.show-grid').remove();
+            console.log('clicked');
+            $(this).closest('.medicine_details').remove();
         });
 
     });

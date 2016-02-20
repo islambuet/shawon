@@ -103,6 +103,11 @@ $lang['LABEL_AGE'] = 'Age';
 $lang['LABEL_SEX'] = 'Sex';
 $lang['LABEL_COMMENT_TOP'] = 'Top Comment';
 $lang['LABEL_COMMENT_BOTTOM'] = 'Bottom Comment';
+$lang['LABEL_MEDICINE_INFO'] = 'Medicine Info';
+$lang['LABEL_MEDICINE_NAME'] = 'Medicine Name';
+$lang['LABEL_MEDICINE_DESCRIPTION'] = 'Medicine Description';
+$lang['LABEL_MEDICINE_DAYS'] = 'Medicine Days';
+$lang['LABEL_MEDICINE_WHEN'] = 'WHEN';
 
 
 
