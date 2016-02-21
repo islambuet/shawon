@@ -26,6 +26,16 @@
     }
     ?>
     <?php
+    if(isset($action_edit_link))
+    {
+        ?>
+        <div class="action_button">
+            <a class="btn" href="<?php echo $action_edit_link; ?>"><?php echo $CI->lang->line("ACTION_EDIT"); ?></a>
+        </div>
+    <?php
+    }
+    ?>
+    <?php
     if(isset($action_details))
     {
         ?>

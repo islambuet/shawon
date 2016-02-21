@@ -80,17 +80,12 @@ class Patients extends Root_Controller
 
             );
             $data['ccs']=array();
-            $data['ccs'][]='cc1';
             $data['oes']=array();
-            $data['oes'][]='oe1';
             $data['invs']=array();
-            $data['invs'][]='inv1';
             $data['dxs']=array();
-            $data['dxs'][]='dx1';
-            $data['comment_top']='this top comment';
-            $data['comment_bottom']='this bottom comment';
+            $data['comment_top']='';
+            $data['comment_bottom']='';
             $data['medicines']=array();
-            $data['medicines'][]=array('name'=>'Shaiful','days'=>'4','description'=>'Shaiful','when'=>'Before Meal',);
             $ajax['system_page_url']=site_url($this->controller_url."/index/add");
 
             $ajax['status']=true;
@@ -114,23 +109,75 @@ class Patients extends Root_Controller
         {
             if(($this->input->post('id')))
             {
-                $office_id=$this->input->post('id');
+                $patient_id=$this->input->post('id');
             }
             else
             {
-                $office_id=$id;
+                $patient_id=$id;
+            }
+            $user = User_helper::get_user();
+
+            $data['patient']=Query_helper::get_info($this->config->item('table_patients'),'*',array('id ='.$patient_id,'user_created ='.$user->user_id),1);
+            if($data['patient'])
+            {
+                $data['title']="Edit Patient (".$data['patient']['name'].')';
+                $data['ccs']=array();
+                $data['oes']=array();
+                $data['invs']=array();
+                $data['dxs']=array();
+                $data['comment_top']='';
+                $data['comment_bottom']='';
+                $data['medicines']=array();
+
+                $details=Query_helper::get_info($this->config->item('table_patient_prescription'),'*',array('patient_id ='.$patient_id,'revision =1'));
+                foreach($details as $detail)
+                {
+                    if($detail['type']==$this->config->item('system_cc'))
+                    {
+                        $data['ccs'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_oe'))
+                    {
+                        $data['oes'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_inv'))
+                    {
+                        $data['invs'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_dx'))
+                    {
+                        $data['dxs'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_comment_top'))
+                    {
+                        $data['comment_top']=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_comment_bottom'))
+                    {
+                        $data['comment_bottom']=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_medicine'))
+                    {
+                        $data['medicines'][]=json_decode($detail['value'],true);
+                    }
+                }
+
+                $ajax['status']=true;
+                $ajax['system_content'][]=array("id"=>"#system_content","html"=>$this->load->view("patients/add_edit",$data,true));
+                if($this->message)
+                {
+                    $ajax['system_message']=$this->message;
+                }
+                $ajax['system_page_url']=site_url($this->controller_url.'/index/edit/'.$patient_id);
+                $this->jsonReturn($ajax);
+            }
+            else
+            {
+                $ajax['status']=false;
+                $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
+                $this->jsonReturn($ajax);
             }
 
-            $data['office']=Query_helper::get_info($this->config->item('table_setup_offices'),'*',array('id ='.$office_id),1);
-            $data['title']="Edit Office (".$data['office']['name'].')';
-            $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_content","html"=>$this->load->view("setup_offices/add_edit",$data,true));
-            if($this->message)
-            {
-                $ajax['system_message']=$this->message;
-            }
-            $ajax['system_page_url']=site_url($this->controller_url.'/index/edit/'.$office_id);
-            $this->jsonReturn($ajax);
         }
         else
         {
@@ -145,23 +192,76 @@ class Patients extends Root_Controller
         {
             if(($this->input->post('id')))
             {
-                $office_id=$this->input->post('id');
+                $patient_id=$this->input->post('id');
             }
             else
             {
-                $office_id=$id;
+                $patient_id=$id;
+            }
+            $user = User_helper::get_user();
+
+            $data['patient']=Query_helper::get_info($this->config->item('table_patients'),'*',array('id ='.$patient_id,'user_created ='.$user->user_id),1);
+            if($data['patient'])
+            {
+                $data['title']="Details of Patient (".$data['patient']['name'].')';
+
+                $data['ccs']=array();
+                $data['oes']=array();
+                $data['invs']=array();
+                $data['dxs']=array();
+                $data['comment_top']='';
+                $data['comment_bottom']='';
+                $data['medicines']=array();
+
+                $details=Query_helper::get_info($this->config->item('table_patient_prescription'),'*',array('patient_id ='.$patient_id,'revision =1'));
+                foreach($details as $detail)
+                {
+                    if($detail['type']==$this->config->item('system_cc'))
+                    {
+                        $data['ccs'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_oe'))
+                    {
+                        $data['oes'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_inv'))
+                    {
+                        $data['invs'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_dx'))
+                    {
+                        $data['dxs'][]=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_comment_top'))
+                    {
+                        $data['comment_top']=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_comment_bottom'))
+                    {
+                        $data['comment_bottom']=$detail['value'];
+                    }
+                    else if($detail['type']==$this->config->item('system_medicine'))
+                    {
+                        $data['medicines'][]=json_decode($detail['value'],true);
+                    }
+                }
+
+                $ajax['status']=true;
+                $ajax['system_content'][]=array("id"=>"#system_content","html"=>$this->load->view("patients/details",$data,true));
+                if($this->message)
+                {
+                    $ajax['system_message']=$this->message;
+                }
+                $ajax['system_page_url']=site_url($this->controller_url.'/index/details/'.$patient_id);
+                $this->jsonReturn($ajax);
+            }
+            else
+            {
+                $ajax['status']=false;
+                $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
+                $this->jsonReturn($ajax);
             }
 
-            $data['office']=Query_helper::get_info($this->config->item('table_setup_offices'),'*',array('id ='.$office_id),1);
-            $data['title']="Details of Office (".$data['office']['name'].')';
-            $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_content","html"=>$this->load->view("setup_offices/details",$data,true));
-            if($this->message)
-            {
-                $ajax['system_message']=$this->message;
-            }
-            $ajax['system_page_url']=site_url($this->controller_url.'/index/details/'.$office_id);
-            $this->jsonReturn($ajax);
         }
         else
         {
@@ -175,6 +275,11 @@ class Patients extends Root_Controller
     {
         $id = $this->input->post("id");
         $user = User_helper::get_user();
+//        $medicines=$this->input->post('medicines');
+//        echo '<PRE>';
+//        print_r($medicines);
+//        echo '</PRE>';
+//        die();
         if($id>0)
         {
             if(!(isset($this->permissions['edit'])&&($this->permissions['edit']==1)))
@@ -204,36 +309,147 @@ class Patients extends Root_Controller
         }
         else
         {
-            $data=$this->input->post('office');
+            $patient=$this->input->post('patient');
+            $patient['date_prescription']=System_helper::get_time($patient['date_prescription']);
+
             $this->db->trans_start();  //DB Transaction Handle START
+            $time=time();
             if($id>0)
             {
+                $data=$patient;
                 $data['user_updated'] = $user->user_id;
-                $data['date_updated'] = time();
+                $data['date_updated'] = $time;
 
-                Query_helper::update($this->config->item('table_setup_offices'),$data,array("id = ".$id));
+                Query_helper::update($this->config->item('table_patients'),$data,array("id = ".$id));
 
             }
             else
             {
-
+                $data=$patient;
                 $data['user_created'] = $user->user_id;
-                $data['date_created'] = time();
-                Query_helper::add($this->config->item('table_setup_offices'),$data);
-            }
-            $this->db->trans_complete();   //DB Transaction Handle END
-            if ($this->db->trans_status() === TRUE)
-            {
-                $save_and_new=$this->input->post('system_save_new_status');
-                $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
-                if($save_and_new==1)
+                $data['date_created'] = $time;
+                $patient_id=Query_helper::add($this->config->item('table_patients'),$data);
+                if($patient_id===false)
                 {
-                    $this->system_add();
+                    $this->db->trans_complete();
+                    $ajax['status']=false;
+                    $ajax['system_message']=$this->lang->line("MSG_SAVED_FAIL");
+                    $this->jsonReturn($ajax);
+                    die();
                 }
                 else
                 {
-                    $this->system_list();
+                    $id=$patient_id;
                 }
+            }
+            $this->db->where('patient_id',$id);
+            $this->db->set('revision', 'revision+1', FALSE);
+            $this->db->update($this->config->item('table_patient_prescription'));
+
+            $ccs=$this->input->post('ccs');
+
+            if(is_array($ccs))
+            {
+                foreach($ccs as $cc)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_cc');
+                    $data['value']=$cc;
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+            $oes=$this->input->post('oes');
+
+            if(is_array($oes))
+            {
+                foreach($oes as $oe)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_oe');
+                    $data['value']=$oe;
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+            $invs=$this->input->post('invs');
+
+            if(is_array($invs))
+            {
+                foreach($invs as $inv)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_inv');
+                    $data['value']=$inv;
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+            $dxs=$this->input->post('dxs');
+            if(is_array($dxs))
+            {
+                foreach($dxs as $dx)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_dx');
+                    $data['value']=$dx;
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+            $comment_top=$this->input->post('comment_top');
+            $data=array();
+            $data['patient_id']=$id;
+            $data['type']=$this->config->item('system_comment_top');
+            $data['value']=$comment_top;
+            $data['revision']=1;
+            $data['user_created'] = $user->user_id;
+            $data['date_created'] = $time;
+            Query_helper::add($this->config->item('table_patient_prescription'),$data);
+            $comment_bottom=$this->input->post('comment_bottom');
+            $data=array();
+            $data['patient_id']=$id;
+            $data['type']=$this->config->item('system_comment_bottom');
+            $data['value']=$comment_bottom;
+            $data['revision']=1;
+            $data['user_created'] = $user->user_id;
+            $data['date_created'] = $time;
+            Query_helper::add($this->config->item('table_patient_prescription'),$data);
+
+            $medicines=$this->input->post('medicines');
+            if(is_array($medicines))
+            {
+                foreach($medicines as $medicine)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_medicine');
+                    $data['value']=json_encode($medicine);
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+
+            $this->db->trans_complete();   //DB Transaction Handle END
+            if ($this->db->trans_status() === TRUE)
+            {
+                $this->message=$this->lang->line("MSG_SAVED_SUCCESS");
+                $this->system_details($id);
+
             }
             else
             {
@@ -246,7 +462,9 @@ class Patients extends Root_Controller
     private function check_validation()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('office[name]',$this->lang->line('LABEL_NAME'),'required');
+        $this->form_validation->set_rules('patient[name]',$this->lang->line('LABEL_NAME'),'required');
+
+        //check if created user has this patient id if id>0
 
         if($this->form_validation->run() == FALSE)
         {

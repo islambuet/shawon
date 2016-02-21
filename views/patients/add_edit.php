@@ -3,7 +3,6 @@ $CI = & get_instance();
 $action_data=array();
 $action_data["action_back"]=base_url($CI->controller_url);
 $action_data["action_save"]='#save_form';
-$action_data["action_save_new"]='#save_form';
 $action_data["action_clear"]='#save_form';
 $CI->load->view("action_buttons",$action_data);
 ?>
@@ -258,9 +257,9 @@ $CI->load->view("action_buttons",$action_data);
                                         <select id="medicine_days"  name="medicines[<?php echo $i+1; ?>][days]" class="form-control">
                                             <option value=""><?php echo $this->lang->line('SELECT');?></option>
                                             <?php
-                                            for($i=0;$i<30;$i++)
+                                            for($d=0;$d<30;$d++)
                                             {?>
-                                                <option value="<?php echo $i;?>" <?php if($i==$medicine['days']){ echo "selected";}?>><?php echo $i;?></option>
+                                                <option value="<?php echo $d;?>" <?php if($d==$medicine['days']){ echo "selected";}?>><?php echo $d;?></option>
                                             <?php
                                             }
                                             ?>
@@ -272,12 +271,12 @@ $CI->load->view("action_buttons",$action_data);
                                         <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DESCRIPTION'); ?><span style="color:#FF0000">*</span></label>
                                     </div>
                                     <div class="col-sm-4 col-xs-8">
-                                        <input type="text" id="medicine_description"  name="medicines[<?php echo $i+1; ?>][description]" class="form-control" value="<?php echo $medicine['description'];?>"">
+                                        <textarea id="medicine_description"  name="medicines[<?php echo $i+1; ?>][description]" class="form-control"><?php echo $medicine['description'];?></textarea>
                                     </div>
                                 </div>
                                 <div class="row show-grid">
                                     <div class="col-xs-4">
-                                        <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
+                                        <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_WHEN'); ?><span style="color:#FF0000">*</span></label>
                                     </div>
                                     <div class="col-sm-4 col-xs-8">
                                         <select id="medicine_when"  name="medicines[<?php echo $i+1; ?>][when]"  class="form-control">
@@ -387,7 +386,7 @@ $CI->load->view("action_buttons",$action_data);
                 <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DESCRIPTION'); ?><span style="color:#FF0000">*</span></label>
             </div>
             <div class="col-sm-4 col-xs-8">
-                <input type="text" id="medicine_description" class="form-control" value="">
+                <textarea id="medicine_description" class="form-control"></textarea>
             </div>
         </div>
         <div class="row show-grid">
