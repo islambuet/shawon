@@ -6,19 +6,19 @@
     $CI->load->view("action_buttons",$action_data);
 ?>
 
-        <div style="margin-left: -40px;width:1211px;height:1650px;background-image:url(<?php echo base_url().'images/back.jpg';?>);font-size:20px;position: relative">
-            <div style="position: absolute;top: 343px;">
-                <div style="width: 570px;padding-left: 200px;float: left">
+        <div style="margin-left: -40px;width:830px;height:1108px;background-image:url(<?php echo base_url().'images/back.jpg';?>);font-size:15px;position: relative">
+            <div style="position: absolute;top: 221px;">
+                <div style="width: 395px;padding-left: 150px;float: left">
                     <?php echo $patient['name']; ?>
                 </div>
-                <div style="width: 300px;padding-left: 95px;float: left">
-                    <?php echo $patient['sex']; ?>
+                <div style="width: 205px;padding-left: 70px;float: left">
+                    <?php echo $patient['age'].'/'.$patient['sex']; ?>
                 </div>
-                <div style="width: 300px;padding-left: 55px;float: left">
+                <div style="width: 180px;padding-left: 45px;float: left">
                     <?php echo System_helper::display_date($patient['date_prescription']); ?>
                 </div>
             </div>
-            <div style="position: absolute;top: 450px;width: 320px;height: 250px;padding-left: 55px;overflow:hidden;font-size: 18px">
+            <div style="position: absolute;top: 300px;width: 230px;height: 160px;padding-left: 30px;overflow:hidden;">
                 <ol>
                 <?php
                 foreach($ccs as $cc)
@@ -30,7 +30,7 @@
                 ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 715px;width: 320px;height: 250px;padding-left: 55px;overflow:hidden;font-size: 18px">
+            <div style="position: absolute;top: 480px;width: 230px;height: 220px;padding-left: 30px;overflow:hidden;">
                 <ol>
                     <?php
                     foreach($oes as $oe)
@@ -42,7 +42,7 @@
                     ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 1065px;width: 320px;height: 250px;padding-left: 55px;overflow:hidden;font-size: 18px">
+            <div style="position: absolute;top: 715px;width: 230px;height: 135px;padding-left: 30px;overflow:hidden;">
                 <ol>
                     <?php
                     foreach($invs as $inv)
@@ -54,7 +54,7 @@
                     ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 1285px;width: 320px;height: 250px;padding-left: 55px;overflow:hidden;font-size: 18px">
+            <div style="position: absolute;top: 860px;width: 230px;height: 125px;padding-left: 30px;overflow:hidden;">
                 <ol>
                     <?php
                     foreach($dxs as $dx)
@@ -66,7 +66,7 @@
                     ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 455px;left: 345px;width: 800px;height: 800px;overflow:hidden;font-size: 18px">
+            <div style="position: absolute;top: 300px;left: 250px;width: 530px;height: 570px;overflow:hidden;">
                 <div>
                     <?php echo $comment_top; ?>
                 </div>
