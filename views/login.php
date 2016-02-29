@@ -10,7 +10,7 @@
     <div class="col-sm-6">
         <div class="login-wrapper">
             <form action="<?php echo base_url();?>home/login" class="form-horizontal" method="post">
-                
+
                 <div class="login_content">
                     <input class="form-control margin_bottom validate[required]" type="text" name="username" placeholder="Username" value=""/>
                     <input class="form-control validate[required]" type="password" name="password" value="" placeholder="Password" />

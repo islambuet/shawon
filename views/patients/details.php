@@ -67,8 +67,54 @@
                 </ol>
             </div>
             <div style="position: absolute;top: 300px;left: 250px;width: 530px;height: 570px;overflow:hidden;">
-                <div>
+                <div style="padding-bottom: 20px;">
                     <?php echo $comment_top; ?>
+                </div>
+                <?php
+                if(sizeof($medicines)>0)
+                {
+                    ?>
+                    <table width="100%">
+                        <?php
+                        foreach($medicines as $index=>$medicine)
+                        {
+                            $num_dots=intval((50-strlen($medicine['name']))/4);
+                            $space='';
+                            for($i=0;$i<$num_dots;$i++)
+                            {
+                                $space.='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...';
+                            }
+                            $days='';
+                            if($medicine['days']>1)
+                            {
+                                $days=$medicine['days'].'&nbsp;days';
+                            }
+                            elseif($medicine['days']==1)
+                            {
+                                $days=$medicine['days'].'&nbsp;day';
+                            }
+                            ?>
+                            <tr>
+                                <td style="text-align: right;width: 20px;"><?php echo ($index+1).'.' ?></td>
+                                <td><span class="medicine_name" data-index="<?php echo $index; ?>" style="text-decoration: underline;"><b><?php echo $medicine['name']; ?></b></span><span id="space_<?php echo $index; ?>" style="float: right;text-align: right;">&nbsp;</span></td>
+                                <td style="text-align: right;width: 75px;"><?php echo $days; ?></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><span style="float: left;width: 350px;padding-left: 30px;padding-right: 10px;"><?php echo $medicine['description']; ?></span><span style="width: 85px;float: right;"><?php echo $medicine['when']; ?></span></td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                            <?php
+                        }
+                        ?>
+                    </table>
+                    <?php
+                }
+
+                ?>
+                <div style="padding-top: 30px;">
+                    <?php echo $comment_bottom; ?>
                 </div>
             </div>
         </div>
@@ -81,6 +127,26 @@
     jQuery(document).ready(function()
     {
         turn_off_triggers();
+        $( ".medicine_name" ).each(function( index )
+        {
+            var width=530-95-$(this).width();
+            var id=$(this).attr('data-index');
+            $("#space_"+id).width(width);
+            var dot='';
+            for(var i=0;i<((width/4)-2);i++)
+            {
+                if(i%8>2)
+                {
+                    dot='&nbsp;'+dot;
+                }
+                else
+                {
+                    dot='.'+dot;
+                }
+            }
+            $("#space_"+id).html(dot);
+            console.log(width);
+        });
 
     });
 </script>
