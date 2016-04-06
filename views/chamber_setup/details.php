@@ -14,28 +14,38 @@
 
         <div class="row show-grid">
             <div class="col-xs-4">
-                <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_NAME');?><span style="color:#FF0000">*</span></label>
+                <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_NAME');?></label>
             </div>
             <div class="col-sm-4 col-xs-8">
-                <label class="control-label"><?php echo $office['name'];?></label>
+                <label class="control-label"><?php echo $chamber['name'];?></label>
             </div>
         </div>
         <div class="row show-grid">
             <div class="col-xs-4">
-                <label class="control-label pull-right"><?php echo $this->lang->line('LABEL_ADDRESS');?><span style="color:#FF0000">*</span></label>
+                <label class="control-label pull-right">Line 1</label>
             </div>
             <div class="col-sm-4 col-xs-8">
-                <label class="control-label"><?php echo $office['address'];?></label>
+                <label class="control-label"><?php echo $chamber['line1'];?></label>
             </div>
         </div>
-        <div style="" class="row show-grid">
+        <div class="row show-grid">
             <div class="col-xs-4">
-                <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_ORDER');?><span style="color:#FF0000">*</span></label>
+                <label class="control-label pull-right">Line 2</label>
             </div>
             <div class="col-sm-4 col-xs-8">
-                <label class="control-label"><?php echo $office['ordering'];?></label>
+                <label class="control-label"><?php echo $chamber['line2'];?></label>
             </div>
         </div>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right">Line 3</label>
+            </div>
+            <div class="col-sm-4 col-xs-8">
+                <label class="control-label"><?php echo $chamber['line3'];?></label>
+            </div>
+        </div>
+
+
     </div>
 
     <div class="clearfix"></div>

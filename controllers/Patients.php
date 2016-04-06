@@ -466,7 +466,7 @@ class Patients extends Root_Controller
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('patient[name]',$this->lang->line('LABEL_NAME'),'required');
-        $this->form_validation->set_rules('patient[chamber]',"Chamber Name",'required');
+        $this->form_validation->set_rules('patient[chamber_id]',"Chamber Name",'required');
 
         //check if created user has this patient id if id>0
 

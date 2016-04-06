@@ -124,7 +124,7 @@
             <div style="position: absolute;top: 1010px;left: 50px;width: 270px;height: 20px;overflow:hidden;">
                 <?php echo $chamber['line2']; ?>
             </div>
-            <div style="position: absolute;top: 1130px;left: 50px;width: 270px;height: 20px;overflow:hidden;">
+            <div style="position: absolute;top: 1030px;left: 50px;width: 270px;height: 20px;overflow:hidden;">
                 <?php echo $chamber['line3']; ?>
             </div>
         </div>
