@@ -12,7 +12,7 @@
                     <?php echo $patient['name']; ?>
                 </div>
                 <div style="width: 205px;padding-left: 70px;float: left">
-                    <?php echo $patient['age'].'yr'.($patient['age']>0?'s':'').'/'.$patient['sex']; ?>
+                    <?php echo $patient['age'].$patient['age_text'].($patient['age']>0?'s':'').'/'.$patient['sex']; ?>
                 </div>
                 <div style="width: 180px;padding-left: 45px;float: left">
                     <?php echo System_helper::display_date($patient['date_prescription']); ?>

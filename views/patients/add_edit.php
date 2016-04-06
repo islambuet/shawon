@@ -38,8 +38,15 @@ $CI->load->view("action_buttons",$action_data);
                         <div class="col-xs-4">
                             <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_AGE');?><span style="color:#FF0000">*</span></label>
                         </div>
-                        <div class="col-sm-4 col-xs-8">
+                        <div class="col-xs-2">
                             <input type="text" name="patient[age]" id="age" class="form-control" value="<?php echo $patient['age'];?>"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <select id="sex" name="patient[age_text]" class="form-control">
+                                <option value="yrs" <?php if($patient['age_text']=='yr'){ echo "selected";}?>>Year(s)</option>
+                                <option value="months" <?php if($patient['age_text']=='month'){ echo "selected";}?>>Month(s)</option>
+                                <option value="days" <?php if($patient['age_text']=='day'){ echo "selected";}?>>Day(s)</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row show-grid">
