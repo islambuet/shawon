@@ -17,6 +17,7 @@ $lang['ACTION_DETAILS'] = 'Details';
 $lang['ACTION_REFRESH'] = 'Refresh';
 $lang['ACTION_CLEAR'] = 'Clear';
 $lang['ACTION_DELETE'] = 'Delete';
+$lang['ACTION_PRINT'] = 'Print';
 $lang['DELETE_CONFIRM'] = 'Are You sure to delete?';
 
 

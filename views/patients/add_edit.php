@@ -16,6 +16,23 @@ $CI->load->view("action_buttons",$action_data);
             </div>
             <div class="clearfix"></div>
         </div>
+        <div class="row show-grid">
+            <div class="col-xs-4">
+                <label class="control-label pull-right">Select Chamber<span style="color:#FF0000">*</span></label>
+            </div>
+            <div class="col-sm-4 col-xs-8">
+                <select id="sex" name="patient[chamber_id]" class="form-control">
+                    <?php
+                    foreach($chambers as $chamber)
+                    {
+                        ?>
+                        <option value="<?php echo $chamber['value'];?>" <?php if($chamber['value']==$patient['chamber_id']){echo 'selected';} ?>><?php echo $chamber['text']; ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">

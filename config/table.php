@@ -19,3 +19,4 @@ $config['table_other_sites_visit'] = 'other_sites_visit';
 
 $config['table_patients'] = 'patients';
 $config['table_patient_prescription'] = 'patient_prescription';
+$config['table_chambers'] = 'chambers';

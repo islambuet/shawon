@@ -3,6 +3,7 @@
     $action_data=array();
     $action_data["action_back"]=base_url($CI->controller_url);
     $action_data["action_edit_link"]=base_url($CI->controller_url."/index/edit/".$patient['id']);
+    $action_data["action_print_page"]='print';
     $CI->load->view("action_buttons",$action_data);
 ?>
 
@@ -116,6 +117,15 @@
                 <div style="padding-top: 30px;">
                     <?php echo $comment_bottom; ?>
                 </div>
+            </div>
+            <div style="position: absolute;top: 990px;left: 90px;width: 230px;height: 20px;overflow:hidden;">
+                <?php echo $chamber['line1']; ?>
+            </div>
+            <div style="position: absolute;top: 1010px;left: 50px;width: 270px;height: 20px;overflow:hidden;">
+                <?php echo $chamber['line2']; ?>
+            </div>
+            <div style="position: absolute;top: 1130px;left: 50px;width: 270px;height: 20px;overflow:hidden;">
+                <?php echo $chamber['line3']; ?>
             </div>
         </div>
 

@@ -11,7 +11,6 @@ class Patients extends Root_Controller
         $this->message="";
         $this->permissions=User_helper::get_permission('Patients');
         $this->controller_url='patients';
-        //$this->load->model("sys_module_task_model");
     }
 
     public function index($action="list",$id=0)
@@ -76,6 +75,7 @@ class Patients extends Root_Controller
                 'name' => '',
                 'age' => '',
                 'sex' => '',
+                'chamber_id'=>0,
                 'date_prescription' => time()
 
             );
@@ -86,6 +86,7 @@ class Patients extends Root_Controller
             $data['comment_top']='';
             $data['comment_bottom']='';
             $data['medicines']=array();
+            $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"'));
             $ajax['system_page_url']=site_url($this->controller_url."/index/add");
 
             $ajax['status']=true;
@@ -116,6 +117,7 @@ class Patients extends Root_Controller
                 $patient_id=$id;
             }
             $user = User_helper::get_user();
+            $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"'));
 
             $data['patient']=Query_helper::get_info($this->config->item('table_patients'),'*',array('id ='.$patient_id,'user_created ='.$user->user_id),1);
             if($data['patient'])
@@ -203,6 +205,7 @@ class Patients extends Root_Controller
             $data['patient']=Query_helper::get_info($this->config->item('table_patients'),'*',array('id ='.$patient_id,'user_created ='.$user->user_id),1);
             if($data['patient'])
             {
+                $data['chamber']=Query_helper::get_info($this->config->item('table_chambers'),'*',array('id ='.$data['patient']['chamber_id']),1);
                 $data['title']="Details of Patient (".$data['patient']['name'].')';
 
                 $data['ccs']=array();
@@ -463,6 +466,7 @@ class Patients extends Root_Controller
     {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('patient[name]',$this->lang->line('LABEL_NAME'),'required');
+        $this->form_validation->set_rules('patient[chamber]',"Chamber Name",'required');
 
         //check if created user has this patient id if id>0
 
