@@ -59,10 +59,10 @@ $CI->load->view("action_buttons",$action_data);
                             <input type="text" name="patient[age]" id="age" class="form-control" value="<?php echo $patient['age'];?>"/>
                         </div>
                         <div class="col-xs-2">
-                            <select id="sex" name="patient[age_text]" class="form-control">
-                                <option value="yrs" <?php if($patient['age_text']=='yr'){ echo "selected";}?>>Year(s)</option>
-                                <option value="months" <?php if($patient['age_text']=='month'){ echo "selected";}?>>Month(s)</option>
-                                <option value="days" <?php if($patient['age_text']=='day'){ echo "selected";}?>>Day(s)</option>
+                            <select id="age_text" name="patient[age_text]" class="form-control">
+                                <option value="yr" <?php if($patient['age_text']=='yr'){ echo "selected";}?>>Year(s)</option>
+                                <option value="month" <?php if($patient['age_text']=='month'){ echo "selected";}?>>Month(s)</option>
+                                <option value="day" <?php if($patient['age_text']=='day'){ echo "selected";}?>>Day(s)</option>
                             </select>
                         </div>
                     </div>
