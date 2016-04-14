@@ -244,7 +244,8 @@ class Chamber_setup extends Root_Controller
     }
     public function get_items()
     {
-        $items=Query_helper::get_info($this->config->item('table_chambers'),'*',array('status !="'.$this->config->item('system_status_delete').'"'));
+        $user = User_helper::get_user();
+        $items=Query_helper::get_info($this->config->item('table_chambers'),'*',array('status !="'.$this->config->item('system_status_delete').'"','user_created ='.$user->user_id));
         $this->jsonReturn($items);
 
     }

@@ -68,7 +68,7 @@ class Patients extends Root_Controller
     {
         if(isset($this->permissions['add'])&&($this->permissions['add']==1))
         {
-
+            $user = User_helper::get_user();
             $data['title']="New Patient";
             $data["patient"] = Array(
                 'id' => 0,
@@ -87,7 +87,8 @@ class Patients extends Root_Controller
             $data['comment_tops']=array();
             $data['comment_bottoms']=array();
             $data['medicines']=array();
-            $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"'));
+            $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"','user_created ='.$user->user_id));
+            $data['times']=Query_helper::get_info($this->config->item('table_times'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"','user_created ='.$user->user_id));
             $ajax['system_page_url']=site_url($this->controller_url."/index/add");
 
             $ajax['status']=true;
@@ -118,8 +119,8 @@ class Patients extends Root_Controller
                 $patient_id=$id;
             }
             $user = User_helper::get_user();
-            $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"'));
-
+            $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"','user_created ='.$user->user_id));
+            $data['times']=Query_helper::get_info($this->config->item('table_times'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"','user_created ='.$user->user_id));
             $data['patient']=Query_helper::get_info($this->config->item('table_patients'),'*',array('id ='.$patient_id,'user_created ='.$user->user_id),1);
             if($data['patient'])
             {
@@ -207,6 +208,7 @@ class Patients extends Root_Controller
             if($data['patient'])
             {
                 $data['chamber']=Query_helper::get_info($this->config->item('table_chambers'),'*',array('id ='.$data['patient']['chamber_id']),1);
+                $data['time']=Query_helper::get_info($this->config->item('table_times'),'*',array('id ='.$data['patient']['time_id']),1);
                 $data['title']="Details of Patient (".$data['patient']['name'].')';
 
                 $data['ccs']=array();

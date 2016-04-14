@@ -149,6 +149,16 @@
             <div style="position: absolute;top: 1070px;left: 50px;width: 300;height: 20px;overflow:hidden;">
                 <?php echo $chamber['line3']; ?>
             </div>
+
+            <div style="position: absolute;top: 1030px;left: 445px;width: 85px;height: 20px;overflow:hidden;">
+                <?php echo $time['line1']; ?>
+            </div>
+            <div style="position: absolute;top: 1052px;left: 360px;width: 170px;height: 20px;overflow:hidden;">
+                <?php echo $time['line2']; ?>
+            </div>
+            <div style="position: absolute;top: 1070px;left: 360px;width: 170px;height: 20px;overflow:hidden;">
+                <?php echo $time['line3']; ?>
+            </div>
         </div>
 
 
@@ -177,7 +187,6 @@
                 }
             }
             $("#space_"+id).html(dot);
-            console.log(width);
         });
 
     });

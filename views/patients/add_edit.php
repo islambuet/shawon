@@ -351,6 +351,23 @@ $CI->load->view("action_buttons",$action_data);
                 </div>
             </div>
             <div class="col-xs-4">
+                <div class="row show-grid">
+                    <div class="col-xs-4">
+                        <label class="control-label pull-right">Select Time<span style="color:#FF0000">*</span></label>
+                    </div>
+                    <div class="col-xs-8">
+                        <select id="chamber_id" name="patient[time_id]" class="form-control">
+                            <?php
+                            foreach($times as $time)
+                            {
+                                ?>
+                                <option value="<?php echo $time['value'];?>" <?php if($time['value']==$patient['time_id']){echo 'selected';} ?>><?php echo $time['text']; ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="col-xs-4">
             </div>
