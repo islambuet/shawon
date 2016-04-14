@@ -99,18 +99,26 @@
                                         $space.='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...';
                                     }
                                     $days=$medicine['days'];
-                                    if(isset($medicine['day_text']))
+                                    if(($medicine['days']!='Continue')&&($medicine['days']>0))
                                     {
-                                        if($medicine['days']!='Continue')
-                                        {
-                                            $days.=' '.$medicine['day_text'].(($medicine['days']>1)?'s':'');
-                                        }
+                                        $days.=' '.$medicine['day_text'].(($medicine['days']>1)?'s':'');
                                     }
 
                                     ?>
                                     <tr>
                                         <td style="text-align: right;width: 20px;"><?php echo ($index+1).'.' ?></td>
-                                        <td><span class="medicine_name" data-index="<?php echo $index; ?>" style="text-decoration: underline;"><b><?php echo $medicine['name']; ?></b></span><span id="space_<?php echo $index; ?>" style="float: right;text-align: right;">&nbsp;</span></td>
+                                        <td>
+                                            <span class="medicine_name" data-index="<?php echo $index; ?>" style="text-decoration: underline;"><b><?php echo $medicine['name']; ?></b></span>
+                                            <?php
+                                            if($days)
+                                            {
+                                                ?>
+                                                <span id="space_<?php echo $index; ?>" style="float: right;text-align: right;">&nbsp;</span>
+                                                <?php
+                                            }
+                                            ?>
+
+                                        </td>
                                         <td style="text-align: right;width: 75px;"><?php echo $days; ?></td>
                                     </tr>
                                     <tr>

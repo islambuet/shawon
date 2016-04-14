@@ -266,18 +266,11 @@ $CI->load->view("action_buttons",$action_data);
                                                     ?>
                                                 </select>
                                             </div>
-                                            <?php
-                                            $day_text='Day';
-                                            if(isset($medicine['day_text']))
-                                            {
-                                                $day_text=$medicine['day_text'];
-                                            }
-                                            ?>
                                             <div class="col-xs-4">
                                                 <select name="medicines[<?php echo $i+1; ?>][day_text]" class="form-control">
-                                                    <option value="Day" <?php if($day_text=="Day"){ echo "selected";}?>>Day(s)</option>
-                                                    <option value="Month" <?php if($day_text=="Month"){ echo "selected";}?>>Month(s)</option>
-                                                    <option value="Week" <?php if($day_text=="Week"){ echo "selected";}?>>Week(s)</option>
+                                                    <option value="Day" <?php if($medicine['day_text']=="Day"){ echo "selected";}?>>Day(s)</option>
+                                                    <option value="Month" <?php if($medicine['day_text']=="Month"){ echo "selected";}?>>Month(s)</option>
+                                                    <option value="Week" <?php if($medicine['day_text']=="Week"){ echo "selected";}?>>Week(s)</option>
                                                 </select>
                                             </div>
                                         </div>
