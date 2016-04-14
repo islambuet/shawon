@@ -76,6 +76,7 @@ class Patients extends Root_Controller
                 'age' => '',
                 'sex' => '',
                 'chamber_id'=>0,
+                'age_text'=>'yr',
                 'date_prescription' => time()
 
             );
@@ -83,8 +84,8 @@ class Patients extends Root_Controller
             $data['oes']=array();
             $data['invs']=array();
             $data['dxs']=array();
-            $data['comment_top']='';
-            $data['comment_bottom']='';
+            $data['comment_tops']=array();
+            $data['comment_bottoms']=array();
             $data['medicines']=array();
             $data['chambers']=Query_helper::get_info($this->config->item('table_chambers'),array('id value','name text'),array('status !="'.$this->config->item('system_status_delete').'"'));
             $ajax['system_page_url']=site_url($this->controller_url."/index/add");
@@ -127,8 +128,8 @@ class Patients extends Root_Controller
                 $data['oes']=array();
                 $data['invs']=array();
                 $data['dxs']=array();
-                $data['comment_top']='';
-                $data['comment_bottom']='';
+                $data['comment_tops']=array();
+                $data['comment_bottoms']=array();
                 $data['medicines']=array();
 
                 $details=Query_helper::get_info($this->config->item('table_patient_prescription'),'*',array('patient_id ='.$patient_id,'revision =1'));
@@ -152,11 +153,11 @@ class Patients extends Root_Controller
                     }
                     else if($detail['type']==$this->config->item('system_comment_top'))
                     {
-                        $data['comment_top']=$detail['value'];
+                        $data['comment_tops'][]=$detail['value'];
                     }
                     else if($detail['type']==$this->config->item('system_comment_bottom'))
                     {
-                        $data['comment_bottom']=$detail['value'];
+                        $data['comment_bottoms'][]=$detail['value'];
                     }
                     else if($detail['type']==$this->config->item('system_medicine'))
                     {
@@ -276,13 +277,12 @@ class Patients extends Root_Controller
 
     private function system_save()
     {
-        $id = $this->input->post("id");
-        $user = User_helper::get_user();
-//        $medicines=$this->input->post('medicines');
 //        echo '<PRE>';
-//        print_r($medicines);
+//        print_r($this->input->post());
 //        echo '</PRE>';
 //        die();
+        $id = $this->input->post("id");
+        $user = User_helper::get_user();
         if($id>0)
         {
             if(!(isset($this->permissions['edit'])&&($this->permissions['edit']==1)))
@@ -412,24 +412,38 @@ class Patients extends Root_Controller
                     Query_helper::add($this->config->item('table_patient_prescription'),$data);
                 }
             }
-            $comment_top=$this->input->post('comment_top');
-            $data=array();
-            $data['patient_id']=$id;
-            $data['type']=$this->config->item('system_comment_top');
-            $data['value']=$comment_top;
-            $data['revision']=1;
-            $data['user_created'] = $user->user_id;
-            $data['date_created'] = $time;
-            Query_helper::add($this->config->item('table_patient_prescription'),$data);
-            $comment_bottom=$this->input->post('comment_bottom');
-            $data=array();
-            $data['patient_id']=$id;
-            $data['type']=$this->config->item('system_comment_bottom');
-            $data['value']=$comment_bottom;
-            $data['revision']=1;
-            $data['user_created'] = $user->user_id;
-            $data['date_created'] = $time;
-            Query_helper::add($this->config->item('table_patient_prescription'),$data);
+            $comment_tops=$this->input->post('comment_tops');
+            if(is_array($comment_tops))
+            {
+                foreach($comment_tops as $comment)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_comment_top');
+                    $data['value']=$comment;
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+
+            $comment_bottoms=$this->input->post('comment_bottoms');
+            if(is_array($comment_bottoms))
+            {
+                foreach($comment_bottoms as $comment)
+                {
+                    $data=array();
+                    $data['patient_id']=$id;
+                    $data['type']=$this->config->item('system_comment_bottom');
+                    $data['value']=$comment;
+                    $data['revision']=1;
+                    $data['user_created'] = $user->user_id;
+                    $data['date_created'] = $time;
+                    Query_helper::add($this->config->item('table_patient_prescription'),$data);
+                }
+            }
+
 
             $medicines=$this->input->post('medicines');
             if(is_array($medicines))
