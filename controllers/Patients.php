@@ -76,6 +76,7 @@ class Patients extends Root_Controller
                 'age' => '',
                 'sex' => '',
                 'chamber_id'=>0,
+                'time_id'=>0,
                 'age_text'=>'yr',
                 'date_prescription' => time()
 
