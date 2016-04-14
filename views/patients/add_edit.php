@@ -253,16 +253,31 @@ $CI->load->view("action_buttons",$action_data);
                                             <div class="col-xs-4">
                                                 <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
                                             </div>
-                                            <div class="col-xs-8">
-                                                <select id="medicine_days"  name="medicines[<?php echo $i+1; ?>][days]" class="form-control">
+                                            <div class="col-xs-4">
+                                                <select name="medicines[<?php echo $i+1; ?>][days]" class="form-control">
                                                     <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                                                    <option value=Continue <?php if($medicine['days']=='Continue'){ echo "selected";}?>>Continue</option>
                                                     <?php
-                                                    for($d=0;$d<30;$d++)
+                                                    for($d=1;$d<30;$d++)
                                                     {?>
                                                         <option value="<?php echo $d;?>" <?php if($d==$medicine['days']){ echo "selected";}?>><?php echo $d;?></option>
                                                     <?php
                                                     }
                                                     ?>
+                                                </select>
+                                            </div>
+                                            <?php
+                                            $day_text='Day';
+                                            if(isset($medicine['day_text']))
+                                            {
+                                                $day_text=$medicine['day_text'];
+                                            }
+                                            ?>
+                                            <div class="col-xs-4">
+                                                <select name="medicines[<?php echo $i+1; ?>][day_text]" class="form-control">
+                                                    <option value="Day" <?php if($day_text=="Day"){ echo "selected";}?>>Day(s)</option>
+                                                    <option value="Month" <?php if($day_text=="Month"){ echo "selected";}?>>Month(s)</option>
+                                                    <option value="Week" <?php if($day_text=="Week"){ echo "selected";}?>>Week(s)</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -462,16 +477,24 @@ $CI->load->view("action_buttons",$action_data);
             <div class="col-xs-4">
                 <label class="control-label pull-right"><?php echo $CI->lang->line('LABEL_MEDICINE_DAYS'); ?><span style="color:#FF0000">*</span></label>
             </div>
-            <div class="col-xs-8">
-                <select id="medicine_days"  class="form-control">
+            <div class="col-xs-4">
+                <select id="medicine_days" class="form-control">
                     <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                    <option value=Continue>Continue</option>
                     <?php
-                    for($i=0;$i<30;$i++)
+                    for($i=1;$i<30;$i++)
                     {?>
                         <option value="<?php echo $i;?>"><?php echo $i;?></option>
                     <?php
                     }
                     ?>
+                </select>
+            </div>
+            <div class="col-xs-4">
+                <select id="medicine_day_text" class="form-control">
+                    <option value="Day">Day(s)</option>
+                    <option value="Month">Month(s)</option>
+                    <option value="Week">Week(s)</option>
                 </select>
             </div>
         </div>
@@ -567,6 +590,7 @@ $CI->load->view("action_buttons",$action_data);
             $('#add_content_medicine').attr('data-current-id',current_id);
             $('#add_content_medicine #medicine_name').attr('name','medicines['+current_id+'][name]');
             $('#add_content_medicine #medicine_days').attr('name','medicines['+current_id+'][days]');
+            $('#add_content_medicine #medicine_day_text').attr('name','medicines['+current_id+'][day_text]');
             $('#add_content_medicine #medicine_description').attr('name','medicines['+current_id+'][description]');
             $('#add_content_medicine #medicine_when').attr('name','medicines['+current_id+'][when]');
             var html=$('#add_content_medicine').html();

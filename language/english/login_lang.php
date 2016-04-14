@@ -107,7 +107,7 @@ $lang['LABEL_COMMENT_BOTTOM'] = 'Bottom Comment';
 $lang['LABEL_MEDICINE_INFO'] = 'Medicine Info';
 $lang['LABEL_MEDICINE_NAME'] = 'Medicine Name';
 $lang['LABEL_MEDICINE_DESCRIPTION'] = 'Medicine Description';
-$lang['LABEL_MEDICINE_DAYS'] = 'Medicine Days';
+$lang['LABEL_MEDICINE_DAYS'] = 'Medicine Duration';
 $lang['LABEL_MEDICINE_WHEN'] = 'When';
 
 

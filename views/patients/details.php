@@ -98,15 +98,15 @@
                                     {
                                         $space.='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...';
                                     }
-                                    $days='';
-                                    if($medicine['days']>1)
+                                    $days=$medicine['days'];
+                                    if(isset($medicine['day_text']))
                                     {
-                                        $days=$medicine['days'].'&nbsp;days';
+                                        if($medicine['days']!='Continue')
+                                        {
+                                            $days.=' '.$medicine['day_text'].(($medicine['days']>1)?'s':'');
+                                        }
                                     }
-                                    elseif($medicine['days']==1)
-                                    {
-                                        $days=$medicine['days'].'&nbsp;day';
-                                    }
+
                                     ?>
                                     <tr>
                                         <td style="text-align: right;width: 20px;"><?php echo ($index+1).'.' ?></td>
