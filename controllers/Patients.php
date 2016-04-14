@@ -213,8 +213,8 @@ class Patients extends Root_Controller
                 $data['oes']=array();
                 $data['invs']=array();
                 $data['dxs']=array();
-                $data['comment_top']='';
-                $data['comment_bottom']='';
+                $data['comment_tops']=array();
+                $data['comment_bottoms']=array();
                 $data['medicines']=array();
 
                 $details=Query_helper::get_info($this->config->item('table_patient_prescription'),'*',array('patient_id ='.$patient_id,'revision =1'));
@@ -238,11 +238,11 @@ class Patients extends Root_Controller
                     }
                     else if($detail['type']==$this->config->item('system_comment_top'))
                     {
-                        $data['comment_top']=$detail['value'];
+                        $data['comment_tops'][]=$detail['value'];
                     }
                     else if($detail['type']==$this->config->item('system_comment_bottom'))
                     {
-                        $data['comment_bottom']=$detail['value'];
+                        $data['comment_bottoms'][]=$detail['value'];
                     }
                     else if($detail['type']==$this->config->item('system_medicine'))
                     {
