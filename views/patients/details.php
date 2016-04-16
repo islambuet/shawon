@@ -8,11 +8,11 @@
 ?>
 
         <div style="margin-left: -40px;width:830px;height:1108px;background-image:url(<?php echo base_url().'images/back.jpg';?>);font-size:15px;position: relative">
-            <div style="position: absolute;top: 128px;left: 675px;width: 130px;height:10px;font-size: 10px;line-height: 10px;background-color:#000000;color: #ffffff;">
+            <div style="position: absolute;top: 125px;left: 675px;width: 130px;height:10px;font-size: 10px;line-height: 10px;background-color:#000000;color: #ffffff;">
                 <?php echo $patient['id']; ?>
             </div>
             <div style="position: absolute;top: 150px;">
-                <div style="width: 415px;padding-left: 95px;float: left">
+                <div style="width: 415px;padding-left: 85px;float: left">
                     <?php echo $patient['name']; ?>
                 </div>
                 <div style="width: 220px;padding-left: 80px;float: left">
@@ -22,7 +22,7 @@
                     <?php echo System_helper::display_date($patient['date_prescription']); ?>
                 </div>
             </div>
-            <div style="position: absolute;top: 235px;width: 250px;height: 200px;padding-left: 30px;overflow:hidden;">
+            <div style="position: absolute;top: 233px;width: 250px;height: 200px;padding-left: 30px;overflow:hidden;">
                 <ol>
                 <?php
                 foreach($ccs as $cc)
@@ -46,7 +46,7 @@
                     ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 725px;width: 250px;height: 135px;padding-left: 30px;overflow:hidden;">
+            <div style="position: absolute;top: 727px;width: 250px;height: 135px;padding-left: 30px;overflow:hidden;">
                 <ol>
                     <?php
                     foreach($invs as $inv)
@@ -58,7 +58,7 @@
                     ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 895px;width: 250px;height: 145px;padding-left: 30px;overflow:hidden;">
+            <div style="position: absolute;top: 898px;width: 250px;height: 145px;padding-left: 30px;overflow:hidden;">
                 <ol>
                     <?php
                     foreach($dxs as $dx)
@@ -70,7 +70,7 @@
                     ?>
                 </ol>
             </div>
-            <div style="position: absolute;top: 255px;left: 280px;width: 530px;height: 765px;overflow:hidden;">
+            <div style="position: absolute;top: 250px;left: 280px;width: 530px;height: 765px;overflow:hidden;">
                 <div style="padding-bottom: 20px;">
                     <ul style="list-style: none;font-style: italic;font-size: 20px;line-height: 25px;padding-left: 2px;">
                         <?php
@@ -148,23 +148,23 @@
                     </ol>
                 </div>
             </div>
-            <div style="position: absolute;top: 1082px;left: 50px;width: 200px;height: 20px;overflow:hidden;font-size: 12px;">
+            <div style="position: absolute;top: 1090px;left: 40px;width: 200px;height: 20px;overflow:hidden;font-size: 12px;">
                 <?php echo $chamber['line1']; ?>
             </div>
-            <div style="position: absolute;top: 1096px;left: 50px;width: 200px;height: 20px;overflow:hidden;font-size: 12px;">
+            <div style="position: absolute;top: 1104px;left: 40px;width: 200px;height: 20px;overflow:hidden;font-size: 12px;">
                 <?php echo $chamber['line2']; ?>
             </div>
-            <div style="position: absolute;top: 1109px;left: 50px;width: 200;height: 20px;overflow:hidden;font-size: 12px;">
+            <div style="position: absolute;top: 1118px;left: 40px;width: 200;height: 20px;overflow:hidden;font-size: 12px;">
                 <?php echo $chamber['line3']; ?>
             </div>
 
-            <div style="position: absolute;top: 1082px;left: 328px;width: 150px;height: 20px;overflow:hidden;font-size: 12px;">
+            <div style="position: absolute;top: 1090px;left: 318px;width: 150px;height: 20px;overflow:hidden;font-size: 12px;">
                 <?php echo $time['line1']; ?>
             </div>
-            <div style="position: absolute;top: 1096px;left: 298px;width: 250px;height: 20px;overflow:hidden;font-size: 12px;">
+            <div style="position: absolute;top: 1104px;left: 288px;width: 250px;height: 20px;overflow:hidden;font-size: 12px;">
                 <?php echo $time['line2']; ?>
             </div>
-            <div style="position: absolute;top: 1109px;left: 298px;width: 250px;height: 20px;overflow:hidden;font-size: 12px;">
+            <div style="position: absolute;top: 1118px;left: 288px;width: 250px;height: 20px;overflow:hidden;font-size: 12px;">
                 <?php echo $time['line3']; ?>
             </div>
         </div>
